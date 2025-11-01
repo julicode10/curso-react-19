@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Modal } from './Modal'
+import styles from './Contador.module.css'
+
 export const Contador = () => {
     const [contador, setContador] = useState(0)
     const [ver, setVer] = useState(false)
@@ -14,14 +16,14 @@ export const Contador = () => {
         setContador(0)
     }
     return (
-        <div>
-            <h2>Contador: {contador}</h2>
-            <button onClick={incrementar}>Incrementar</button>
-            <button onClick={decrementar}>Decrementar</button>
-            <button onClick={resetear}>Resetear</button>
+        <div className={styles.card}>
+            <h2 className={styles.contador}>Contador: {contador}</h2>
+            <button className={styles.button} onClick={incrementar}>Incrementar</button>
+            <button className={styles.button} onClick={decrementar}>Decrementar</button>
+            <button className={styles.button} onClick={resetear}>Resetear</button>
 
-            <h2>Ver Modal: {ver ? 'Si' : 'No'}</h2>
-            <button onClick={() => setVer(!ver)}>Ver Modal</button>
+            <h2 className={styles.title}>Ver Modal: {ver ? 'Si' : 'No'}</h2>
+            <button className={styles.button} onClick={() => setVer(!ver)}>Ver Modal</button>
             {
                 ver && <Modal />
             }
