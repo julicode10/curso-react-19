@@ -2,6 +2,8 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { Link } from "react-router-dom";
 
 export const CardList = () => {
+  const urlImage =
+    "https://cdn.pixabay.com/photo/2016/11/21/06/53/beautiful-natural-image-1844362_640.jpg";
   const temasTeoria = [
     {
       title: "hook useEffect",
@@ -9,7 +11,11 @@ export const CardList = () => {
     },
     {
       title: "imagenes",
-      to: "/imagenes",
+      to: `/imagenes?src=${urlImage}`,
+    },
+    {
+      title: "rutas anidadas",
+      to: "/rutas-anidadas",
     },
   ];
   return (

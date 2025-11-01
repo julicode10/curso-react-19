@@ -1,6 +1,9 @@
+import { useSearchParams } from "react-router-dom";
 import imagenlocal from "../assets/mormonas.jpg";
 import { BtnVolver } from "../components/ui/buttons/BtnVolver";
 export const ImagenesPage = () => {
+  const [searchParams] = useSearchParams();
+  const src = searchParams.get("src");
   return (
     <main className="max-w-3xl mx-auto p-6 space-y-10 ">
       <BtnVolver />
@@ -13,10 +16,7 @@ export const ImagenesPage = () => {
       </section>
       <section className="space-y-2">
         <h2 className="text-xl font-semibold">Imagen desde url externa</h2>
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLONT3RnBtMVFVk0zt9Qb8FU0PmC18Jtngmg&s"
-          alt="imagen local"
-        />
+        <img src={src} alt="imagen externa" loading="lazy" />
       </section>
 
       <section className="space-y-2">

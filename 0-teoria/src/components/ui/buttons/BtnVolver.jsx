@@ -6,7 +6,7 @@ export const BtnVolver = () => {
 
   return (
     <button
-      onClick={() => navigate(-1)}
+      onClick={() => navigate("/")}
       className="absolute top-4 left-4 bg-white text-black hover:bg-[#f2f2f2] p-3 rounded-full shadow-lg cursor-pointer"
     >
       <Icon icon="material-symbols:arrow-back-rounded" width="24" height="24" />
