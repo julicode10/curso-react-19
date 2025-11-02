@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { BtnVolver } from "../components/ui/buttons/BtnVolver";
 
 export const ApiPage = () => {
-  const [pokemons, setPokemons] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const { data, isLoading, error } = useQuery({
+  const {
+    data: data1,
+    isLoading: isLoading1,
+    error: error1,
+    refetch: refetch1,
+  } = useQuery({
     queryKey: ["consulta api pokemon"],
     queryFn: async () => {
       const response = await axios.get(
@@ -14,18 +16,25 @@ export const ApiPage = () => {
       );
       return response.data.results;
     },
+    enabled: !!data1,
   });
 
-  if (isLoading) return <div>Cargando...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-  if (!data) return <div>No hay datos</div>;
+  if (isLoading1) return <div>Cargando...</div>;
+  if (error1) return <div>Error: {error1.message}</div>;
+  if (!data1) return <div>No hay datos</div>;
 
   return (
     <main className="h-screen bg-amber-400 text-black">
       {/* <BtnVolver /> */}
       <h1>ApiPage</h1>
+      <button
+        className="bg-blue-500 text-white p-2 rounded-md cursor-pointer"
+        onClick={refetch1}
+      >
+        click a refetch
+      </button>
       <section className="flex flex-col">
-        {data.map((pokemon, index) => (
+        {data1.map((pokemon, index) => (
           <div key={index}>
             <h2>{pokemon.name}</h2>
           </div>
