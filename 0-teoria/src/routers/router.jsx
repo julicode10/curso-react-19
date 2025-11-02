@@ -7,22 +7,21 @@ import { ImagenesPage } from "../pages/ImagenesPage";
 import { RutasAnidadasPage } from "../pages/RutasAnidadasPage";
 import { PerfilPage } from "../pages/PerfilPage";
 import { ConfiguracionPage } from "../pages/ConfiguracionPage";
-import { LayoutMain } from "../layouts/LayoutMain";
+import { ApiPage } from "../pages/ApiPage";
 
 export const MyRouter = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<LayoutMain />}>
-        <Route index element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="useffect" element={<UseEffectPage />} />
-        <Route path="imagenes" element={<ImagenesPage />} />
-        <Route path="rutas-anidadas" element={<RutasAnidadasPage />}>
-          {/* el index es el componente que se muestra cuando la ruta es /rutas-anidadas */}
-          <Route index element={<Navigate to="perfil/10" replace />} />
-          <Route path="perfil/:id" element={<PerfilPage />} />
-          <Route path="configuracion" element={<ConfiguracionPage />} />
-        </Route>
+      <Route index element={<Home />} />
+      <Route path="login" element={<Login />} />
+      <Route path="apis" element={<ApiPage />} />
+      <Route path="useffect" element={<UseEffectPage />} />
+      <Route path="imagenes" element={<ImagenesPage />} />
+      <Route path="rutas-anidadas" element={<RutasAnidadasPage />}>
+        {/* el index es el componente que se muestra cuando la ruta es /rutas-anidadas */}
+        <Route index element={<Navigate to="perfil/10" replace />} />
+        <Route path="perfil/:id" element={<PerfilPage />} />
+        <Route path="configuracion" element={<ConfiguracionPage />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />
