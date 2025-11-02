@@ -9,16 +9,10 @@ export const ApiPage = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["consulta api pokemon"],
     queryFn: async () => {
-      try {
-        const response = await fetch(
-          "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0"
-        );
-        const data = await response.json();
-        return data.results;
-      } catch (error) {
-        console.error(error);
-        throw error;
-      }
+      const response = await axios.get(
+        "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0"
+      );
+      return response.data.results;
     },
   });
 
