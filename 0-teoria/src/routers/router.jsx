@@ -8,6 +8,7 @@ import { RutasAnidadasPage } from "../pages/RutasAnidadasPage";
 import { PerfilPage } from "../pages/PerfilPage";
 import { ConfiguracionPage } from "../pages/ConfiguracionPage";
 import { ApiPage } from "../pages/ApiPage";
+import { FormulariosPage } from "../pages/FormulariosPage";
 
 export const MyRouter = () => (
   <BrowserRouter>
@@ -17,6 +18,7 @@ export const MyRouter = () => (
       <Route path="apis" element={<ApiPage />} />
       <Route path="useffect" element={<UseEffectPage />} />
       <Route path="imagenes" element={<ImagenesPage />} />
+      <Route path="formularios" element={<FormulariosPage />} />
       <Route path="rutas-anidadas" element={<RutasAnidadasPage />}>
         {/* el index es el componente que se muestra cuando la ruta es /rutas-anidadas */}
         <Route index element={<Navigate to="perfil/10" replace />} />
