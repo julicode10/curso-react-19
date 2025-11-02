@@ -1,6 +1,15 @@
 import { MyRouter } from "./routers/router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+const queryClient = new QueryClient();
 function App() {
-  return <MyRouter />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <MyRouter />
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  );
 }
 
 export default App;

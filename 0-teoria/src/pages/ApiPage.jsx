@@ -1,46 +1,42 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import { BtnVolver } from "../components/ui/buttons/BtnVolver";
+
 export const ApiPage = () => {
   const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    axios
-      .get("https://pokeapi.co/api/v2/pokemon?limit=20&offset=0")
-      .then((response) => {
-        setPokemons(response.data.results);
-        console.log(response.data.results);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-    // fetch("https://pokeapi.co/api/v2/pokemon?limit=20&offset=0")
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     setPokemons(data.results);
-    //     console.log(data.results);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-  }, []);
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["consulta api pokemon"],
+    queryFn: async () => {
+      try {
+        const response = await fetch(
+          "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0"
+        );
+        const data = await response.json();
+        return data.results;
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
+    },
+  });
+
+  if (isLoading) return <div>Cargando...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  if (!data) return <div>No hay datos</div>;
+
   return (
-    <div className="h-screen bg-amber-400 text-black">
+    <main className="h-screen bg-amber-400 text-black">
+      {/* <BtnVolver /> */}
       <h1>ApiPage</h1>
-      {loading ? (
-        <div>
-          <h2>Cargando...</h2>
-        </div>
-      ) : (
-        <section className="flex flex-col">
-          {pokemons.map((pokemon, index) => (
-            <div key={index}>
-              <h2>{pokemon.name}</h2>
-            </div>
-          ))}
-        </section>
-      )}
-    </div>
+      <section className="flex flex-col">
+        {data.map((pokemon, index) => (
+          <div key={index}>
+            <h2>{pokemon.name}</h2>
+          </div>
+        ))}
+      </section>
+    </main>
   );
 };
